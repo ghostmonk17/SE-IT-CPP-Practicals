@@ -1,0 +1,87 @@
+#include <iostream>
+#include <stack> 
+using namespace std;
+
+struct BTNode {
+    BTNode* lc;
+    int data;
+    BTNode* rc;
+};
+
+class BST {
+    BTNode* root;
+public:
+    BST() : root(nullptr) {} 
+    void createBST();
+    void traverse();
+    void inorder();  
+};
+
+void BST::createBST() {
+    int i, n;
+    BTNode* par; 
+    BTNode* temp; 
+    BTNode* newnp;
+    cout << "How many numbers in BST: ";
+    cin >> n;
+    cout << "Enter values: ";
+    for (i = 1; i <= n; i++) {
+        newnp = new BTNode;
+        cin >> newnp->data;
+        newnp->lc = newnp->rc = NULL;
+        
+        if (i == 1) {
+            root = newnp;
+        } 
+        else {
+            par = nullptr;
+            temp = root;
+            while (temp != NULL) {
+                par = temp;
+                if (newnp->data < temp->data) {
+                    temp = temp->lc;
+                } else {
+                    temp = temp->rc;
+                }
+            }
+            if (newnp->data < par->data) {
+                par->lc = newnp;
+            } else {
+                par->rc = newnp;
+            }
+        }
+    }
+}
+
+void BST::inorder() {
+    stack<BTNode*> s;
+    BTNode* current = root;
+
+    while (current != NULL|| !s.empty()) {
+        //leftmost node
+        while (current != NULL) {
+            s.push(current);
+            current = current->lc;
+        }
+
+       
+        current = s.top();
+        s.pop();
+        cout << current->data << " ";
+
+        //right node
+        current = current->rc;
+    }
+}
+
+void BST::traverse() {
+    inorder();
+    cout << endl;
+}
+
+int main() {
+    BST T;
+    T.createBST();
+    T.traverse();
+    return 0;
+}
