@@ -107,4 +107,20 @@ int main() {
 
     return 0;
 }
-   
+
+
+/* OUTPUT:
+
+Enter Expression
+a+b*(c^d-e)^(f+g*h)-i
+Prefix : -+a*b^-^cde+f*ghi
+Postfix : abcd^e-fgh*+^*+i-
+
+Enter Prefix Expression for Evaluation
+*-+935/4
+Evaluation of Prefix : 14
+
+Enter Postfix Expression for Evaluation
+93+54/*
+Evaluation of Postfix : 14
+*/
